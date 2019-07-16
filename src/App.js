@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from './header';
+import ArtistList from './artistElements/ArtistList';
+import ArtistDetails from './artistDetails';
+import Loaded from './loaded'
+import dataArtists from './data'
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      artists: null,
+      selectedArtist: 0,
+      loaded: false,
+    };
+    setTimeout(() => {
+      this.setState({
+        artists: dataArtists,
+        loaded: true
+      })
+    }, 0)
+  }
+  updateSelectedArtist = (index) => {
+    this.setState({
+      selectedArtist: index
+    });
+  };
+  render() {
+    return (
+      <div className='App d-flex flex-column'>
+        <Header />
+        {this.state.loaded ? (<div className='d-flex flex-row flex-fill pt-4 p-2'>
+          <ArtistList artists={this.state.artists} updateSelectedArtist={this.updateSelectedArtist} />
+          <ArtistDetails artist={this.state.artists[this.state.selectedArtist]} />
+        </div>) : (
+            <Loaded />
+          )}
+
+      </div>
+    );
+  }
 }
 
 export default App;
