@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 import Header from './header';
 import ArtistList from './artistElements/ArtistList';
 import ArtistDetails from './artistDetails';
 import Loaded from './loaded'
-import dataArtists from './data'
+//import dataArtists from './data.json'
 
 class App extends Component {
   constructor(props) {
@@ -14,18 +15,32 @@ class App extends Component {
       selectedArtist: 0,
       loaded: false,
     };
+  }
+  componentDidMount() {
+    Axios
+      .get("http://localhost:8000/artists")
+      .then(response => {
+        this.setState({
+          artists: response.data,
+        });
+      })
+      .catch(err => console.log(err));
+
+
     setTimeout(() => {
       this.setState({
-        artists: dataArtists,
+        //artists: dataArtists,
         loaded: true
       })
-    }, 0)
+    }, 2000)
   }
+
   updateSelectedArtist = (index) => {
     this.setState({
       selectedArtist: index
     });
-  };
+  }
+
   render() {
     return (
       <div className='App d-flex flex-column'>
