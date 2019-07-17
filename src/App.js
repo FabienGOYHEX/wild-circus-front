@@ -5,7 +5,6 @@ import Header from './header';
 import ArtistList from './artistElements/ArtistList';
 import ArtistDetails from './artistDetails';
 import Loaded from './loaded'
-//import dataArtists from './data.json'
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +28,6 @@ class App extends Component {
 
     setTimeout(() => {
       this.setState({
-        //artists: dataArtists,
         loaded: true
       })
     }, 2000)

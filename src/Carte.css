@@ -1,0 +1,16 @@
+.leaflet-container {
+	height: 75vh;
+	width: 70%;
+	text-align: center;
+	margin-top: 100px;
+	margin-left: 15px;
+	margin-right: 15px;
+	border: solid;
+	border-color: rgb(129, 121, 122);
+	border-radius: 15px;
+}
+
+.leaflet-div-icon {
+	background: none;
+	border: 0px;
+}
